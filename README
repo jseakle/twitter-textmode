@@ -1,0 +1,58 @@
+== Twitter Textmode ==
+
+Turns your twitter feed into a plain html page in chronological order.
+
+This project is something I wrote for myself, as documented at
+http://edgewhys.wordpress.com/fixing-twitter. I have made
+only the briefest gestures towards making it usable by others. It's
+probably not even something you want. But if it is, here's how.
+
+You Will Need:
+
+1. A linux box with python and a webserver on it, and permission to
+tell it to host a static html page.
+
+2. A twitter account.
+
+Setup:
+
+1. Install python-twitter and its dependencies. See https://github.com/bear/python-twitter
+
+2. git clone textmode wherever you want it. No setup, it's just a
+script and some files.
+
+3. Go to dev.twitter.com, sign in, and go through the application
+creation process. You can put arbitrary stuff in the text fields, it
+doesn't actually matter.
+
+4. When you're done, it will give you four long gobbledy strings of
+delicious encryption-key. Copy those into the appropriate strings in
+keys.py
+
+5. Set outfile in keys.py to the full path to the file you want your
+twitter feed written to. Tell your webserver to start serving that
+page.
+
+6. (optional) Replace the tweet id in since with the id of the tweet
+before you'd like textmode to start at. The id right there is just
+some random tweet from my feed; this will work fine, but if you are
+doing this significantly later than 2/5/13, it may go further back
+than you'd like and cause ratelimiting issues.
+
+7. Tell cron to run textmode.py once an hour (or whatever). Right now,
+for me, the Twitter API is limited to 350 requests an hour, so doing
+it significantly more frequently might not work, depending on how many
+people you follow.
+
+8. Wait for cron or run it yourself, and then load your shiny, shiny
+new textmode twitter feed your browser.
+
+Notes:
+
+Currently shows all tweets by people you follow, including tweets @
+people you don't follow. I like this, but you could probably filter
+them out pretty easily if you wanted.
+
+Currently timestamps every hour, because I don't care about the exact
+moment of a tweet enough to sacrifice the horizontal space, but this
+would also be an easy change. pydoc twitter.Status for relevant info.
