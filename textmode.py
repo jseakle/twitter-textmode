@@ -13,7 +13,7 @@ for u in friends:
 
 statuses += api.GetUserTimeline(None, None, None, since, include_rts=True)
 
-out = codecs.open(keys.file, encoding="utf-8",  mode="a")
+out = codecs.open(keys.outfile, encoding="utf-8",  mode="a")
 
 statuses.sort(key=lambda x: x.id)
 
